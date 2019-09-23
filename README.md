@@ -82,16 +82,16 @@ You can also easily run the app from Visual Studio Code:
 # For Developers...
 Show how the application is coded. It is a "normal" ASP.NET Core application, with the following additions:
 
-- `PaymentService.csproj` has package references for Steeltoe and Swashbuckle
-- `appsettings.json` has an app name configured for the info endpoint
-- `appsettings.Production.json` changes the management endpoints URL to a value appropriate for PCF (default is /actuator like SpringBoot)
-- `RedisHitCountService` has an `IConnectionMultiplexer` injected to give access to Redis. This comes from PCF and Steeltoe (see below)
-- `Program.cs` has the following Steeltoe additions:
+- [PaymentService.csproj](PaymentService.csproj) has package references for Steeltoe and Swashbuckle
+- [appsettings.json](appsettings.json) has an app name configured for the info endpoint
+- [appsettings.Production.json](appsettings.Production.json) changes the management endpoints URL to a value appropriate for PCF (default is /actuator like SpringBoot)
+- [RedisHitCountService](Services/RedisHitCountService.cs) has an `IConnectionMultiplexer` injected to give access to Redis. This comes from PCF and Steeltoe (see below)
+- [Program.cs](Program.cs) has the following Steeltoe additions:
     - `UseCloudFoundryHosting`
     - `AddCloudFoundry`
     - `AddDynamicConsole` in the logging configuration - this is the hook into the logging UI in PCF app manager
-- `Startup.cs` has the following Steeltoe additions:
+- [Startup.cs](Startup.cs) has the following Steeltoe additions:
     - `AddRedisConnectionMiltiplexer` - automatically binds to redis service instance bound to the app in PCF
     - `AddCloudFoundryActuators` and `UseCloudFoundryActuators` - turns on the management endpoints (Spring actuator)
-- `Startup.cs` configures the app for a memory based hit counter in the development environment (default local environment), otherwise uses the Redis implementation. PCF looks like "Production" by default
-- `PaymentController` has `IOptions<CloudFoundryApplicationOptions>` injected - this gives access to the application instance index. Steeltoe defaults this to "-1" when running locally
+- [Startup.cs](Startup.cs) configures the app for a memory based hit counter in the development environment (default local environment), otherwise uses the Redis implementation. PCF looks like "Production" by default
+- [PaymentController](Controllers/PaymentController.cs) has `IOptions<CloudFoundryApplicationOptions>` injected - this gives access to the application instance index. Steeltoe defaults this to "-1" when running locally
