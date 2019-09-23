@@ -45,7 +45,7 @@ You can also easily run the app from Visual Studio Code:
 1. Verify the install by opening a terminal or command window and typing `cf --version`. You should see a version string to match the version you installed
 1. If you are using a private installation of PCF, then obtain credentials and API enpoint information from your PCF platform team. If you are using Pivotal Web Services (the public PCF instance hosted by Pivotal), then go to [https://run.pivotal.io/](https://run.pivotal.io/) and register for a free account.
 1. Log in to the application manager for your PCF instance (https://run.pivotal.io if using Pivotal Web Services). Create a Redis cache service in your PCF environment. On Pivotal Web Services, add a Redis Cloud instance using the 30MB (free) plan. Name the service "xxxredis" where "xxx" are your initials
-1. Modify the file `manifest.yml` in the root directory of the application source code - change the redis service instance name to match the name of the Redis service instance you just created
+1. Modify the file [manifest.yml](manifest.yml) in the root directory of the application source code - change the redis service instance name to match the name of the Redis service instance you just created
 1. Login with the CLI...
     1. Open a terminal or command window and login to PCF with the command `cf login -a api.run.pivotal.io` (or whatever API endpoint you are using if not Pivotal Web Services)
     1. Enter the email you registered and the password you set
