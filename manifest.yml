@@ -1,0 +1,5 @@
+applications:
+- name: PaymentService-1.0
+  random-route: true
+  services:
+  - jgbredis
