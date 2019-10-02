@@ -1,5 +1,5 @@
 applications:
-- name: PaymentService-1.0
+- name: PaymentService
   random-route: true
   services:
-  - jgbredis
+  - PaymentCalculatorRedis
