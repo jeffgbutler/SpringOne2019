@@ -48,8 +48,8 @@ You can also easily run the app from Visual Studio Code:
 1. Login with the CLI...
     1. Open a terminal or command window and login to PCF with the command `cf login -a api.run.pivotal.io` (or whatever API endpoint you are using if not Pivotal Web Services)
     1. Enter the email you registered and the password you set
-1. Execute `cf push` from the application root directory. Make note of the route created for the application (for example, it might be something like "paymentservice-10-persistent-oryx.cfapps.io")
-1. Navigate to the application in a browser (for example: https://paymentservice-10-persistent-oryx.cfapps.io)
+1. Execute `cf push` from the application root directory. Make note of the route created for the application (for example, it might be something like "paymentservice-persistent-oryx.cfapps.io")
+1. Navigate to the application in a browser (for example: https://paymentservice-persistent-oryx.cfapps.io)
 
 # Basic Demo Script
 
@@ -76,7 +76,7 @@ You can also easily run the app from Visual Studio Code:
         - Settings -> Mappings
         - Dynamic Log Configuration (Turn the PaymentController log to Debug, then off)
         - SpringBoot Trace
-    - In app manager, set the logging level for "PaymentController" to "DEBUG". Tail the logs to show the debug message from the controller. Set the logging leve to "OFF" - show that the message is no longer being generated
+    - In app manager, set the logging level for "PaymentController" to "DEBUG". Tail the logs to show the debug message from the controller. Set the logging level to "OFF" - show that the message is no longer being generated
 
 # For Developers...
 Show how the application is coded. It is a "normal" ASP.NET Core application, with the following additions:
