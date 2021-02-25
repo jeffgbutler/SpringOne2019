@@ -3,7 +3,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using PaymentService.Models;
 using PaymentService.Services;
-using Steeltoe.Extensions.Configuration.CloudFoundry;
 
 namespace PaymentService.Controllers
 {
@@ -12,18 +11,15 @@ namespace PaymentService.Controllers
     public class PaymentController
     {
         private PaymentCalculator PaymentCalculator;
-        private CloudFoundryApplicationOptions AppOptions;
         private IHitCountService HitCountService;
 
         private readonly ILogger _logger;
         
         public PaymentController(PaymentCalculator paymentCalculator,
-                IOptions<CloudFoundryApplicationOptions> appOptions,
                 IHitCountService hitCountService,
                 ILogger<PaymentController> logger)
         {
             PaymentCalculator = paymentCalculator;
-            AppOptions = appOptions.Value;
             HitCountService = hitCountService;
             _logger = logger;
         }
@@ -40,7 +36,7 @@ namespace PaymentService.Controllers
                 Amount = Amount,
                 Rate = Rate,
                 Years = Years,
-                Instance = AppOptions.InstanceIndex.ToString(),
+                Instance = "K8S",
                 Count = HitCountService.GetAndIncrement(),
                 Payment = Payment
             };

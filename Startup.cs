@@ -7,9 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PaymentService.Services;
-using Steeltoe.CloudFoundry.Connector.Redis;
-using Steeltoe.Extensions.Configuration.CloudFoundry;
-using Steeltoe.Management.CloudFoundry;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace PaymentService
@@ -30,19 +27,10 @@ namespace PaymentService
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddOptions();
-            services.ConfigureCloudFoundryOptions(Configuration);
             services.AddSingleton<PaymentCalculator>();
             services.AddSingleton<CrashService>();
 
-            if (Env.IsDevelopment())
-            {
-                services.AddSingleton<IHitCountService, MemoryHitCountService>();
-            }
-            else
-            {
-                services.AddRedisConnectionMultiplexer(Configuration);
-                services.AddSingleton<IHitCountService, RedisHitCountService>();
-            }
+            services.AddSingleton<IHitCountService, MemoryHitCountService>();
 
             services.AddSwaggerGen(c =>
             {
@@ -53,7 +41,6 @@ namespace PaymentService
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
             });
-            services.AddCloudFoundryActuators(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -69,7 +56,6 @@ namespace PaymentService
                 app.UseHsts();
             }
 
-            app.UseCloudFoundryActuators();
             app.UseHttpsRedirection();
             app.UseSwagger();
             app.UseSwaggerUI(c =>
